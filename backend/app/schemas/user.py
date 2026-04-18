@@ -75,6 +75,17 @@ class UserResponse(BaseModel):
     onboarding_completed: bool = False
     created_at: datetime
     
+    @validator('dimensions', pre=True)
+    def parse_dimensions(cls, v):
+        """处理 dimensions 字段，可能是字符串或列表"""
+        if isinstance(v, str):
+            import json
+            try:
+                return json.loads(v)
+            except:
+                return []
+        return v or []
+    
     class Config:
         from_attributes = True
 

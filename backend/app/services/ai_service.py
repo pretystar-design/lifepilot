@@ -452,27 +452,36 @@ async def generate_mock_suggestions(analysis: Dict, dimensions: list) -> List[Di
         config = DIMENSION_CONFIG.get(dimension, {})
         count = analysis["dimension_counts"].get(dimension, 0)
         mock_items = MOCK_SUGGESTIONS.get(dimension, [])
+        details = analysis["dimension_details"].get(dimension, [])
         
+        # 根据记录数量生成不同建议
         if count == 0:
             # 用户没有任何该维度的记录
-            for i, item in enumerate(mock_items[:2]):
-                suggestions.append({
-                    "dimension": dimension,
-                    "content": item["content"],
-                    "priority": item["priority"]
-                })
-        elif count < 3:
-            # 记录较少
             suggestions.append({
                 "dimension": dimension,
-                "content": mock_items[0]["content"],
+                "content": f"开始记录你的{config.get('label', dimension)}相关内容吧！建议每天花几分钟记录一下",
+                "priority": 1
+            })
+        elif count == 1:
+            # 只有1条记录
+            record_content = details[0] if details else ""
+            suggestions.append({
+                "dimension": dimension,
+                "content": f"你记录了「{record_content[:30]}...」。继续保持这个好习惯，建议每周至少记录3次",
+                "priority": 1
+            })
+        elif count == 2:
+            # 有2条记录
+            suggestions.append({
+                "dimension": dimension,
+                "content": "你已经养成了记录的习惯！建议尝试分析记录中的规律，发现更多成长机会",
                 "priority": 1
             })
         else:
-            # 记录充足，给出进阶建议
+            # 记录充足（>=3条）
             suggestions.append({
                 "dimension": dimension,
-                "content": mock_items[1]["content"],
+                "content": f"你已经有{count}条记录，非常棒！建议定期回顾这些记录，设定新的目标",
                 "priority": 2
             })
     

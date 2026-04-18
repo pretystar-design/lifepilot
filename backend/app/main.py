@@ -38,6 +38,7 @@ def create_app() -> FastAPI:
     # 注册路由
     app.include_router(auth.router)
     app.include_router(records.router)
+    app.include_router(suggestions.router)
     
     # 静态文件服务 (上传的音频文件)
     uploads_dir = "./uploads"

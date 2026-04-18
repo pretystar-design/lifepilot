@@ -13,6 +13,7 @@ import { showOnboardingPage } from './pages/onboarding';
 import { showHomePage } from './pages/home';
 import { showRecordsPage } from './pages/records';
 import { showSuggestionsPage } from './pages/suggestions';
+import { showSuggestionHistoryPage } from './pages/suggestion-history';
 
 // 引入 API 和认证工具
 import { api } from './utils/api';
@@ -25,7 +26,8 @@ const routes: Record<string, (container: HTMLElement, navigate: (page: string, p
     'onboarding': showOnboardingPage,
     'home': showHomePage,
     'records': showRecordsPage,
-    'suggestions': showSuggestionsPage
+    'suggestions': showSuggestionsPage,
+    'suggestion-history': showSuggestionHistoryPage
 };
 
 /**
