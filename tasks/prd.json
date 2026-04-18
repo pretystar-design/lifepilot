@@ -1,0 +1,222 @@
+{
+  "project": {
+    "name": "LifePilot",
+    "version": "0.1.0",
+    "description": "个人生活智能助手 MVP",
+    "tech_stack": {
+      "frontend": ["TypeScript", "Bootstrap CSS", "uni-app"],
+      "backend": ["Python", "FastAPI"],
+      "database": ["PostgreSQL", "Redis"],
+      "ai": ["OpenAI API", "DeepSeek API"]
+    },
+    "complexity": "medium",
+    "sprint_duration": "1 week"
+  },
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "用户注册与登录",
+      "description": "作为新用户，我想要快速注册登录，以便于开始使用产品",
+      "acceptance_criteria": [
+        "支持手机号 + 验证码注册",
+        "支持微信一键登录（小程序）",
+        "首次登录引导用户设置昵称和关注维度",
+        "注册流程不超过 30 秒"
+      ],
+      "priority": "P0",
+      "estimated_minutes": 120,
+      "passes": true,
+      "tasks": []
+    },
+    {
+      "id": "US-002",
+      "title": "文字记录生活",
+      "description": "作为用户，我想要用文字记录今天的生活，以便于积累数据获得 AI 建议",
+      "acceptance_criteria": [
+        "支持输入标题（可选）和内容（必填）",
+        "自动识别分类到学习/理财/健康",
+        "支持手动选择分类",
+        "支持添加标签",
+        "记录保存后显示在时间线",
+        "输入框支持 Markdown 预览"
+      ],
+      "priority": "P0",
+      "estimated_minutes": 180,
+      "passes": true,
+      "tasks": [
+        "创建 Record 模型 - backend/app/models/record.py",
+        "创建 Record Schema - backend/app/schemas/record.py",
+        "创建记录 CRUD API - backend/app/routers/records.py",
+        "创建 AI 分类服务 - backend/app/services/ai_service.py",
+        "创建前端记录页面 - frontend/src/pages/records.ts",
+        "创建记录详情弹窗 - frontend/src/pages/record-detail.ts",
+        "更新 API 客户端 - frontend/src/utils/api.ts",
+        "更新首页添加记录导航 - frontend/src/pages/home.ts"
+      ]
+    },
+    {
+      "id": "US-004",
+      "title": "AI 建议生成",
+      "description": "作为用户，我想要查看 AI 对我的分析建议，以便于改善我的生活",
+      "acceptance_criteria": [
+        "每日生成一次综合建议",
+        "建议分为学习成长/理财规划/健康三个维度",
+        "每个维度显示 1-3 条建议",
+        "建议基于用户历史记录分析",
+        "用户可以标记建议有用/无用",
+        "支持查看建议历史"
+      ],
+      "priority": "P0",
+      "estimated_minutes": 360,
+      "passes": true,
+      "tasks": [
+        "创建 Suggestion 模型 - backend/app/models/suggestion.py",
+        "创建 Suggestion Schema - backend/app/schemas/suggestion.py",
+        "创建建议 API 路由 - backend/app/routers/suggestions.py",
+        "扩展 AI 服务增加建议生成功能 - backend/app/services/ai_service.py",
+        "创建前端建议页面 - frontend/src/pages/suggestions.ts",
+        "更新 API 客户端增加建议相关方法 - frontend/src/utils/api.ts",
+        "更新首页集成建议摘要 - frontend/src/pages/home.ts",
+        "更新主入口添加建议路由 - frontend/src/main.ts"
+      ]
+    },
+    {
+      "id": "US-005",
+      "title": "数据概览仪表盘",
+      "description": "作为用户，我想要看到我的生活数据概览，以便于了解自己的整体状态",
+      "acceptance_criteria": [
+        "显示本周记录数量趋势图",
+        "显示三个维度的记录占比",
+        "显示连续记录天数",
+        "显示最近 7 天 AI 建议摘要",
+        "支持按周/月切换视图"
+      ],
+      "priority": "P0",
+      "estimated_minutes": 240,
+      "passes": false,
+      "tasks": []
+    },
+    {
+      "id": "US-006",
+      "title": "时间线浏览",
+      "description": "作为用户，我想要按时间线浏览我的记录，以便于回顾过去的生活",
+      "acceptance_criteria": [
+        "按日期倒序显示记录",
+        "支持按维度筛选（全部/学习/理财/健康）",
+        "支持关键词搜索",
+        "点击记录查看详情",
+        "支持编辑和删除记录"
+      ],
+      "priority": "P0",
+      "estimated_minutes": 180,
+      "passes": false,
+      "tasks": []
+    },
+    {
+      "id": "US-003",
+      "title": "语音记录生活",
+      "description": "作为用户，我想要用语音快速记录，以便于不方便打字时也能记录",
+      "acceptance_criteria": [
+        "点击麦克风按钮开始录音",
+        "录音时长限制 60 秒",
+        "录音结束自动转文字",
+        "显示转写结果，支持编辑",
+        "保存原始音频和转写文字"
+      ],
+      "priority": "P1",
+      "estimated_minutes": 240,
+      "passes": true,
+      "tasks": [
+        "实现 Web Audio API 录音 - frontend/src/pages/records.ts",
+        "实现音频文件上传 API - backend/app/routers/records.py",
+        "实现语音转文字 API（可模拟）- backend/app/services/ai_service.py",
+        "实现录音状态管理和 UI"
+      ]
+    },
+    {
+      "id": "US-007",
+      "title": "维度设置",
+      "description": "作为用户，我想要设置我关注的维度，以便于获得相关建议",
+      "acceptance_criteria": [
+        "支持开启/关闭三个维度",
+        "每个维度可设置目标",
+        "可设置每个维度的提醒频率",
+        "设置保存后立即生效"
+      ],
+      "priority": "P1",
+      "estimated_minutes": 120,
+      "passes": false,
+      "tasks": []
+    },
+    {
+      "id": "US-008",
+      "title": "每日提醒",
+      "description": "作为用户，我想要收到每日记录提醒，以便于养成记录习惯",
+      "acceptance_criteria": [
+        "支持设置提醒时间",
+        "支持开关提醒",
+        "提醒内容个性化（基于昨日记录）",
+        "小程序订阅消息推送",
+        "Web 端浏览器通知"
+      ],
+      "priority": "P1",
+      "estimated_minutes": 180,
+      "passes": false,
+      "tasks": []
+    },
+    {
+      "id": "US-010",
+      "title": "个人主页",
+      "description": "作为用户，我想要管理我的个人信息，以便于个性化使用体验",
+      "acceptance_criteria": [
+        "显示头像、昵称",
+        "支持修改昵称",
+        "显示注册天数、总记录数",
+        "显示当前会员状态（预留）",
+        "入口：设置、帮助、反馈"
+      ],
+      "priority": "P1",
+      "estimated_minutes": 120,
+      "passes": false,
+      "tasks": []
+    },
+    {
+      "id": "US-009",
+      "title": "数据导出",
+      "description": "作为用户，我想要导出我的数据，以便于备份或迁移",
+      "acceptance_criteria": [
+        "支持导出为 JSON 格式",
+        "支持导出为 PDF 报告",
+        "可选择时间范围",
+        "可选择导出维度",
+        "导出后发送到邮箱"
+      ],
+      "priority": "P2",
+      "estimated_minutes": 120,
+      "passes": false,
+      "tasks": []
+    },
+    {
+      "id": "US-011",
+      "title": "激励机制",
+      "description": "作为用户，我想要获得成就徽章，以便于激励我持续记录",
+      "acceptance_criteria": [
+        "连续记录 7/30/100 天获得徽章",
+        "首次记录、首次获得建议获得徽章",
+        "徽章显示在个人主页",
+        "获得徽章时显示庆祝动画"
+      ],
+      "priority": "P1",
+      "estimated_minutes": 120,
+      "passes": false,
+      "tasks": []
+    }
+  ],
+  "progress": {
+    "current_sprint": 2,
+    "current_story": "US-002, US-003",
+    "completed_stories": ["US-001", "US-002", "US-003"],
+    "total_stories": 11,
+    "total_estimated_minutes": 1800
+  }
+}

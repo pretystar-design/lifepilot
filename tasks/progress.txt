@@ -1,0 +1,157 @@
+# LifePilot 开发进度
+
+## 项目信息
+- 项目名称：LifePilot
+- 开始时间：2026-04-16
+- 当前 Sprint：3
+- 目标：完成 AI 建议生成功能
+
+---
+
+## Sprint 1 进度 ✅ 已完成
+
+### 已完成任务
+- [x] US-001: 用户注册与登录
+  - 后端项目结构搭建
+  - 前端项目结构搭建
+  - 用户认证 API (注册/登录/验证码)
+  - JWT Token 认证
+  - 微信登录预留接口
+  - 前端登录/注册页面
+  - 首次登录引导
+  - 首页仪表盘
+
+---
+
+## Sprint 2 进度 ✅ 已完成
+
+### 已完成任务
+- [x] US-002: 文字记录生活
+  - Record 数据模型
+  - 记录 CRUD API 端点
+  - AI 分类服务（支持 OpenAI/DeepSeek API，回退到关键词匹配）
+  - 前端记录创建页面
+  - Markdown 实时预览
+  - 标签管理（支持添加/移除/AI推荐标签）
+  - 时间线页面（支持分页、筛选、搜索）
+  - 记录详情弹窗
+  - 首页快捷记录功能
+
+- [x] US-003: 语音记录生活
+  - Web Audio API 录音功能
+  - 60 秒录音时长限制
+  - 语音转文字 API（支持 Whisper API，回退到模拟数据）
+  - 录音状态 UI 管理
+  - 音频文件上传和存储
+
+### 新增文件
+```
+backend/app/models/record.py      # 记录数据模型
+backend/app/schemas/record.py    # 记录相关 Schema
+backend/app/routers/records.py   # 记录 CRUD API
+backend/app/services/ai_service.py # AI 服务（分类+转写）
+backend/app/services/__init__.py
+frontend/src/pages/records.ts    # 记录页面
+frontend/src/pages/record-detail.ts # 记录详情弹窗
+```
+
+### 更新的文件
+```
+backend/app/main.py               # 注册 records 路由
+backend/app/models/__init__.py    # 导出 Record 模型
+frontend/src/utils/api.ts         # 添加记录相关 API
+frontend/src/pages/home.ts        # 添加记录导航
+frontend/src/main.ts              # 添加记录页面路由
+```
+
+### API 端点
+| 端点 | 方法 | 描述 |
+|------|------|------|
+| /api/records | POST | 创建记录 |
+| /api/records | GET | 获取记录列表（分页、筛选、搜索） |
+| /api/records/{id} | GET | 获取记录详情 |
+| /api/records/{id} | PUT | 更新记录 |
+| /api/records/{id} | DELETE | 删除记录 |
+| /api/records/classify | POST | AI 内容分类 |
+| /api/records/transcribe | POST | 语音转文字 |
+| /api/records/upload/audio | POST | 上传音频文件 |
+| /api/records/stats/summary | GET | 获取记录统计 |
+
+---
+
+## Sprint 3 进度 ✅ 已完成
+
+### 已完成任务
+- [x] US-004: AI 建议生成
+  - Suggestion 数据模型（建议内容、维度、用户反馈、创建时间）
+  - 建议相关 Schema 定义
+  - 建议 API 端点：
+    - POST /api/suggestions/generate - 生成今日建议
+    - GET /api/suggestions/today - 获取今日建议
+    - GET /api/suggestions/history - 获取建议历史
+    - POST /api/suggestions/{id}/feedback - 标记建议有用/无用
+    - GET /api/suggestions/{id} - 获取单条建议
+  - 扩展 AI 服务：
+    - 分析用户历史记录（按维度统计、趋势分析）
+    - 生成个性化建议（调用 LLM API，支持模拟数据）
+  - 前端建议页面（三个维度分组展示、反馈按钮、历史弹窗）
+  - 首页集成（显示建议摘要、快捷入口）
+
+### 新增文件
+```
+backend/app/models/suggestion.py   # 建议数据模型
+backend/app/schemas/suggestion.py  # 建议相关 Schema
+backend/app/routers/suggestions.py # 建议 API 路由
+frontend/src/pages/suggestions.ts   # 建议页面
+```
+
+### 更新的文件
+```
+backend/app/services/ai_service.py # 扩展建议生成功能
+backend/app/models/__init__.py     # 导出 Suggestion 模型
+backend/app/main.py                 # 注册 suggestions 路由
+frontend/src/utils/api.ts          # 添加建议相关 API
+frontend/src/pages/home.ts          # 集成建议摘要
+frontend/src/main.ts               # 添加建议页面路由
+```
+
+### API 端点
+| 端点 | 方法 | 描述 |
+|------|------|------|
+| /api/suggestions/generate | POST | 生成今日建议（每日一次） |
+| /api/suggestions/today | GET | 获取今日建议 |
+| /api/suggestions/history | GET | 获取建议历史（默认7天） |
+| /api/suggestions/{id}/feedback | POST | 标记建议有用/无用 |
+| /api/suggestions/{id} | GET | 获取单条建议详情 |
+
+---
+
+## Sprint 4 计划
+- US-005: 数据概览仪表盘
+- US-007: 维度设置
+
+---
+
+## 学习记录
+
+### 2026-04-16
+- 项目启动
+- 完成产品简报
+- 完成 PRD 文档
+- 完成高级启发审查
+- PRD 转 JSON
+- 实施就绪检查通过
+- Sprint 1 完成 ✅
+  - 后端：FastAPI + SQLAlchemy + SQLite
+  - 前端：TypeScript + Bootstrap 5
+  - API 端点：7 个认证相关接口
+
+### 2026-04-17
+- Sprint 2 完成 ✅
+  - US-002 文字记录生活
+  - US-003 语音记录生活
+  - 后端：8 个记录管理 API
+  - AI 分类服务（关键词 + OpenAI/DeepSeek）
+  - 语音转文字（模拟 + Whisper API）
+  - 前端：记录页面 + 时间线 + 详情弹窗
+  - 首页快捷记录 + 统计数据展示

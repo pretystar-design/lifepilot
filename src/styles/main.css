@@ -1,0 +1,220 @@
+/**
+ * LifePilot 全局样式
+ */
+
+/* ============ 基础变量 ============ */
+:root {
+    --primary-color: #4f46e5;
+    --secondary-color: #6b7280;
+    --success-color: #10b981;
+    --warning-color: #f59e0b;
+    --danger-color: #ef4444;
+    --light-bg: #f9fafb;
+}
+
+/* ============ 全局样式 ============ */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background-color: var(--light-bg);
+    min-height: 100vh;
+}
+
+#app {
+    min-height: 100vh;
+}
+
+/* ============ 认证页面 ============ */
+.auth-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.auth-container {
+    width: 100%;
+    max-width: 400px;
+}
+
+.auth-logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+.auth-card .card {
+    border: none;
+    border-radius: 16px;
+}
+
+/* ============ 引导页面 ============ */
+.onboarding-page {
+    min-height: 100vh;
+    padding: 40px 20px;
+    background: linear-gradient(180deg, #f0f9ff 0%, #fff 100%);
+}
+
+.welcome-icon {
+    font-size: 48px;
+}
+
+.dimension-card {
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.dimension-card:hover {
+    transform: translateY(-2px);
+}
+
+.dimension-card .card {
+    transition: all 0.2s ease;
+}
+
+.dimension-card .card.border-primary {
+    box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
+}
+
+/* ============ 首页样式 ============ */
+.home-page {
+    background-color: var(--light-bg);
+    min-height: 100vh;
+    padding-bottom: 80px; /* 底部导航空间 */
+}
+
+.welcome-section {
+    padding: 20px 0;
+}
+
+.quick-record-card .card {
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.quick-record-card .form-control {
+    border: none;
+    border-radius: 12px;
+    padding: 16px 20px;
+    font-size: 16px;
+}
+
+.quick-record-card .form-control:focus {
+    box-shadow: none;
+    border-color: transparent;
+}
+
+.quick-record-card .btn {
+    border-radius: 12px;
+}
+
+.dimension-tabs .btn {
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-weight: 500;
+}
+
+.dimension-tabs .btn.active {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+}
+
+.stats-section .card {
+    border: none;
+    border-radius: 12px;
+}
+
+.stats-section .card:first-child {
+    background-color: var(--primary-color) !important;
+}
+
+.stats-section .card:nth-child(2) {
+    background-color: var(--success-color) !important;
+}
+
+.stats-section .card:last-child {
+    background-color: var(--warning-color) !important;
+}
+
+.ai-suggestion-section .card {
+    border-radius: 16px;
+}
+
+/* ============ 空状态 ============ */
+.empty-state {
+    background: white;
+    border-radius: 16px;
+    padding: 40px;
+}
+
+/* ============ 底部导航 (预留) ============ */
+.bottom-nav {
+    padding: 10px 0;
+}
+
+.bottom-nav .nav-link {
+    padding: 8px 0;
+    color: var(--secondary-color);
+}
+
+.bottom-nav .nav-link.active {
+    color: var(--primary-color);
+}
+
+.bottom-nav .nav-link i {
+    font-size: 20px;
+    display: block;
+    margin-bottom: 2px;
+}
+
+/* ============ 动画 ============ */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.auth-container > *,
+.onboarding-page > .container > * {
+    animation: fadeIn 0.3s ease forwards;
+}
+
+/* ============ 响应式调整 ============ */
+@media (max-width: 576px) {
+    .auth-page {
+        padding: 10px;
+    }
+    
+    .auth-container {
+        max-width: 100%;
+    }
+    
+    .onboarding-page {
+        padding: 20px 10px;
+    }
+    
+    .stats-section .col-4 {
+        padding: 0 6px;
+    }
+    
+    .stats-section .card-body {
+        padding: 12px 8px;
+    }
+    
+    .stats-section .h3 {
+        font-size: 1.5rem;
+    }
+}
